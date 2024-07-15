@@ -46,7 +46,7 @@ function coffeeClock() {
     const intervalId = setInterval(updateClock, 60000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [updateClock]);
   return (
     <div className="coffee-clock">
       <div className="plate"></div>
