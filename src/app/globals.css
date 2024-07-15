@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.coffee-clock {
+  --width: 70vmin;
+  width: var(--width);
+  font-size: calc(var(--width) / 100);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  > * {
+    grid-area: 1/1;
+  }
+  > .plate {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: #1d1d1f;
+    border: 1em solid hsla(0, 0%, 100%, 0.5);
+    box-shadow: 3em 3em 4em hsl(0 0% 0% / 0.5);
+    display: grid;
+    &::before {
+      content: "";
+      grid-area: 1/1;
+      border-radius: 50%;
+      --w: calc(360deg / 60);
+      background-image: repeating-conic-gradient(
+        from -15deg,
+        transparent 0 14deg,
+        hsl(0, 0%, 100%) 14.5deg 15.5deg,
+        transparent 16deg 30deg
+      );
+      mask-image: radial-gradient(transparent 40%, black);
+    }
+  }
+  > .cup {
+    width: 55%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+  }
+  > .handle {
+    width: 5%;
+    height: 75%;
+    place-self: center;
+    display: grid;
+    filter: drop-shadow(1.5em 1.5em 2em hsl(0 0% 0% / 0.5));
+    > div {
+      display: grid;
+      rotate: var(--angle-hour);
+      &::before {
+        content: "";
+        height: 50%;
+        background-color: hsl(0, 0%, 40%);
+        border-radius: 2vmax;
+      }
+    }
+  }
+  > .coffee {
+    width: 55%;
+    aspect-ratio: 1/1;
+    border: 2em solid hsl(0 0% 40%);
+    border-radius: 50%;
+    background-color: #3a281b;
+    z-index: 1;
+  }
+
+  > .spoon {
+    width: 5%;
+    height: 100%;
+    place-self: center;
+    display: grid;
+    filter: drop-shadow(1.5em 1.5em 2em hsl(0 0% 0% / 0.5));
+    z-index: 1;
+    > div {
+      display: grid;
+      perspective: 100em;
+      transform-origin: preserve-3d;
+      rotate: var(--angle-minute);
+      &::before {
+        content: "";
+        height: 45%;
+        background: linear-gradient(
+            90deg,
+            hsl(0 0% 0% / 0.1),
+            #0000,
+            hsl(0 0% 0% / 0.1)
+          ),
+          linear-gradient(hsl(0, 0%, 60%) 95%, #0000);
+        border-radius: 999vmax 999vmax 0 0;
+        transform: rotateX(-60deg);
+      }
+    }
+  }
+}
